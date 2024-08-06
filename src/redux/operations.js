@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://661f381416358961cd93cd73.mockapi.io/api';
+axios.defaults.baseURL = 'https://66b23d3b1ca8ad33d4f70ff5.mockapi.io';
 
 // the operations.js is where we dispatch the action generators corresponding for each phase of the async promise
 // export const fetchContacts = () => async dispatch => {
