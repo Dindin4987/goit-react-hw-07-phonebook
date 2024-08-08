@@ -4,14 +4,14 @@ import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
-import { fetchContacts, addContact, deleteContact } from 'redux/operations';
+import { setFilter } from '../redux/filterSlice';
+import { fetchContacts, addContact, deleteContact } from '../redux/operations';
 import {
   selectFilter,
   selectVisibleContacts,
   selectIsLoading,
   selectError,
-} from 'redux/selectors';
+} from '../redux/selectors';
 
 // const retrievedInitialContacts = () => {
 //   const savedContacts = JSON.parse(localStorage.getItem('contacts'));
