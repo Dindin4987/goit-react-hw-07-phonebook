@@ -1,41 +1,28 @@
-// import { createStore } from 'redux';
+// store.js
 // import { devToolsEnhancer } from '@redux-devtools/extension';
-import { combineReducers } from 'redux';
+// import { contactsReducer } from '../redux/reducers';
+// import { filterReducer } from '../redux/reducers';
+import { contactsSlice } from '../redux/contactsSlice';
+import { filterSlice } from '../redux/filterSlice';
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import { filterSlice } from './filterSlice';
-import { contactsSlice } from './contactsSlice';
 
-// Combine your reducers
-const rootReducer = combineReducers({
-  contacts: contactsSlice.reducer,
-  filter: filterSlice.reducer,
-});
+// Combine reducers
+// const rootReducer = combineReducers({
+//   contacts: contactsReducer,
+//   filter: filterReducer,
+// });
 
-// Create the persist config object
-const persistConfig = {
-  key: 'root',
-  storage,
-  // You can specify which parts of your state you want to persist here
-  whitelist: ['contacts'], // In your case, you probably only want to persist contacts
-};
-
-// Wrap your rootReducer with persistReducer
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// const initialState = {};
-
+// Create a store extension to add developer tools
 // const enhancer = devToolsEnhancer();
 
 // export const store = createStore(rootReducer, enhancer);
 
-// configureStore sets up the enhancer under the hood
-// so that we don't need to manually import the devtools enhancer function
-//to use the Redux Dev Tools
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    // contacts: contactsReducer,
+    // filter: filterReducer,
+    contacts: contactsSlice.reducer,
+    filter: filterSlice.reducer,
+  },
+  // The middleware and devTools enhancer are automatically included by default, so you don't need to specify them.
 });
-
-export const persistor = persistStore(store);

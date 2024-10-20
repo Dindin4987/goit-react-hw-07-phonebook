@@ -1,48 +1,34 @@
+// src/redux/actions.js
+import { createAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
-// javascript naming convention
-// it is recommended to use ALL_CAPS case with undesrcore as the word separator for string constants
-// SCREAMING_SNAKE_CASE
-
 // Action Types
-export const ADD_CONTACT = 'contacts/addContact';
-export const DELETE_CONTACT = 'contacts/deleteContact';
-export const SET_FILTER = 'filter/setFilter';
+// export const ADD_CONTACT = 'contacts/addContact';
+// export const DELETE_CONTACT = 'contacts/deleteContact';
+// export const SET_FILTER = 'filters/setFilter';
 
-// Action Generators
-// this creates the action objects that describe how the state will change when the action generator is called
+// Action Creators
 
-// export const addContact = ({ name, number }) => ({
-//   type: ADD_CONTACT,
-//   payload: {
-//     id: nanoid(), // this is coming from the nanoid library and generates a random ID automatically for each contact
-//     name,
-//     number,
-//   },
-// });
+// Adds a new contact
+// createAction takes a type and an optional payload creator function. For addContact, we're using
+// a payload creator function to include the ID generation logic.
+export const addContact = createAction(
+  'contacts/addContact',
+  ({ name, number }) => ({
+    payload: {
+      id: nanoid(), // Generate a unique ID for each contact
+      name,
+      number,
+    },
+  })
+);
 
-// export const deleteContact = id => ({
-//   type: DELETE_CONTACT,
-//   payload: id,
-// });
-
-// export const setFilter = filter => ({
-//   type: SET_FILTER,
-//   payload: filter,
-// });
-
-// Implicit Return
-// const sampleImplicitFn = () => ({}); // function that directly returns something
-// // hence using parenthesis
-
-// // Explicit Return
-// const sampleExplicitFn = () => {
-//   return {};
-// };
-
-// Actions declaration using the createAction(type) function
-import { createAction } from '@reduxjs/toolkit';
-
-export const addContact = createAction('contacts/addContact');
+// Deletes a contact by id
+// For simple actions where the payload is directly passed, you can just pass the type.
 export const deleteContact = createAction('contacts/deleteContact');
+
+// Sets the current filter
 export const setFilter = createAction('filter/setFilter');
+
+// Now, each of these actions can be dispatched directly, and they will follow the {type, payload} format.
+// Redux Toolkit's createAction simplifies the process of creating actions and ensures consistency.
